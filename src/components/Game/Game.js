@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Form from '../Form'
+import Guess from '../Guess'
 
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
@@ -11,9 +12,15 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
+  const [guesses, setGuesses] = React.useState([])
+
   return (
     <>
-      <Form />
+      {guesses.map(({ word, id }) => (
+        <Guess key={id} word={word} />
+      ))}
+
+      <Form guesses={guesses} setGuesses={setGuesses} />
     </>
   )
 }
